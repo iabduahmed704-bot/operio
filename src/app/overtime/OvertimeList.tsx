@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { Check, X } from "lucide-react";
 import { reviewOvertime } from "@/lib/actions/overtime";
 
@@ -13,6 +14,7 @@ export function OvertimeList({
   initialItems: OvertimeRow[];
   canReview: boolean;
 }) {
+  const t = useTranslations("overtimePage");
   const [items, setItems] = useState(initialItems);
   const [isPending, startTransition] = useTransition();
 
@@ -28,13 +30,19 @@ export function OvertimeList({
   }
 
   if (items.length === 0) {
-    return <p className="py-8 text-center text-sm text-muted-foreground">No overtime submitted yet.</p>;
+    return <p className="py-8 text-center text-sm text-muted-foreground">{t("empty")}</p>;
   }
 
   const statusColor: Record<string, string> = {
     pending: "bg-amber-500/10 text-amber-500",
     approved: "bg-emerald-500/10 text-emerald-500",
     rejected: "bg-red-500/10 text-red-500",
+  };
+
+  const statusLabel: Record<string, string> = {
+    pending: t("pending"),
+    approved: t("approved"),
+    rejected: t("rejected"),
   };
 
   return (
@@ -44,7 +52,7 @@ export function OvertimeList({
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium">{item.hours} hours</p>
             <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusColor[item.status]}`}>
-              {item.status}
+              {statusLabel[item.status] ?? item.status}
             </span>
           </div>
           <p className="mt-1 text-xs text-muted-foreground">{item.reason}</p>
@@ -56,7 +64,7 @@ export function OvertimeList({
                 disabled={isPending}
                 className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-500 disabled:opacity-60"
               >
-                <Check className="h-3 w-3" /> Approve
+                <Check className="h-3 w-3" /> {t("approve")}
               </button>
               <button
                 type="button"
@@ -64,7 +72,7 @@ export function OvertimeList({
                 disabled={isPending}
                 className="flex items-center gap-1 rounded-full bg-red-500/10 px-3 py-1 text-xs font-medium text-red-500 disabled:opacity-60"
               >
-                <X className="h-3 w-3" /> Reject
+                <X className="h-3 w-3" /> {t("reject")}
               </button>
             </div>
           )}

@@ -5,6 +5,17 @@ import { MobileNav } from "@/components/layout/MobileNav";
 import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 
+const typeKey: Record<string, string> = {
+  opening: "typeOpening",
+  closing: "typeClosing",
+  cleaning: "typeCleaning",
+  food_safety: "typeFoodSafety",
+  equipment: "typeEquipment",
+  manager: "typeManager",
+  weekly: "typeWeekly",
+  monthly: "typeMonthly",
+};
+
 export default async function ChecklistsPage() {
   const t = await getTranslations("checklists");
   const user = await requireAuth();
@@ -52,7 +63,7 @@ export default async function ChecklistsPage() {
                   <div>
                     <p className="text-sm font-medium">{template.title}</p>
                     <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                      {template.type.replace(/_/g, " ")}
+                      {typeKey[template.type] ? t(typeKey[template.type] as "typeOpening") : template.type}
                     </p>
                   </div>
                 </Link>

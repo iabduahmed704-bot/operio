@@ -1,9 +1,17 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { updateExperimentStats, addExperimentFeedback, type ExperimentStatus } from "@/lib/actions/experiments";
 
 const statuses: ExperimentStatus[] = ["testing", "needs_changes", "approved", "rejected", "launched"];
+const statusKey: Record<ExperimentStatus, string> = {
+  testing: "statusTesting",
+  needs_changes: "statusNeedsChanges",
+  approved: "statusApproved",
+  rejected: "statusRejected",
+  launched: "statusLaunched",
+};
 
 type Experiment = {
   id: string;
@@ -25,6 +33,7 @@ export function ExperimentDetail({
   experiment: Experiment;
   feedback: Feedback[];
 }) {
+  const t = useTranslations("experimentsPage");
   const [prepared, setPrepared] = useState(experiment.prepared_count);
   const [sold, setSold] = useState(experiment.sold_count);
   const [waste, setWaste] = useState(experiment.waste_count);
@@ -59,7 +68,7 @@ export function ExperimentDetail({
       <div className="rounded-2xl border border-border bg-surface p-4">
         <div className="grid grid-cols-3 gap-3">
           <label className="block">
-            <span className="mb-1 block text-xs text-muted-foreground">Prepared</span>
+            <span className="mb-1 block text-xs text-muted-foreground">{t("prepared")}</span>
             <input
               type="number"
               value={prepared}
@@ -68,7 +77,7 @@ export function ExperimentDetail({
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs text-muted-foreground">Sold</span>
+            <span className="mb-1 block text-xs text-muted-foreground">{t("sold")}</span>
             <input
               type="number"
               value={sold}
@@ -77,7 +86,7 @@ export function ExperimentDetail({
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs text-muted-foreground">Waste</span>
+            <span className="mb-1 block text-xs text-muted-foreground">{t("waste")}</span>
             <input
               type="number"
               value={waste}
@@ -88,7 +97,7 @@ export function ExperimentDetail({
         </div>
 
         <label className="mt-3 block">
-          <span className="mb-1 block text-xs text-muted-foreground">Status</span>
+          <span className="mb-1 block text-xs text-muted-foreground">{t("status")}</span>
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value as ExperimentStatus)}
@@ -96,7 +105,7 @@ export function ExperimentDetail({
           >
             {statuses.map((s) => (
               <option key={s} value={s}>
-                {s.replace(/_/g, " ")}
+                {t(statusKey[s] as "statusTesting")}
               </option>
             ))}
           </select>
@@ -108,12 +117,12 @@ export function ExperimentDetail({
           disabled={isPending}
           className="mt-3 w-full rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
         >
-          Save
+          {t("save")}
         </button>
       </div>
 
       <div className="rounded-2xl border border-border bg-surface p-4">
-        <p className="mb-3 text-sm font-semibold">Feedback</p>
+        <p className="mb-3 text-sm font-semibold">{t("feedback")}</p>
         <div className="space-y-2">
           {feedback.map((f) => (
             <p key={f.id} className="text-sm text-muted-foreground">
@@ -125,7 +134,7 @@ export function ExperimentDetail({
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           rows={2}
-          placeholder="Add feedback"
+          placeholder={t("addFeedbackPlaceholder")}
           className="mt-3 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
         />
         <button
@@ -134,7 +143,7 @@ export function ExperimentDetail({
           disabled={isPending}
           className="mt-2 w-full rounded-xl border border-border px-4 py-2.5 text-sm font-medium disabled:opacity-60"
         >
-          Add feedback
+          {t("addFeedback")}
         </button>
       </div>
     </div>

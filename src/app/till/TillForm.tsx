@@ -1,18 +1,20 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { submitTillHandover } from "@/lib/actions/till";
 
-const fields = [
-  { name: "openingCash", label: "Opening cash" },
-  { name: "expectedCash", label: "Expected cash" },
-  { name: "actualCash", label: "Actual cash counted" },
-  { name: "cardPayments", label: "Card payments" },
-  { name: "cashPayments", label: "Cash payments" },
-  { name: "refunds", label: "Refunds" },
-];
+const fieldKeys = [
+  { name: "openingCash", key: "openingCash" },
+  { name: "expectedCash", key: "expectedCash" },
+  { name: "actualCash", key: "actualCash" },
+  { name: "cardPayments", key: "cardPayments" },
+  { name: "cashPayments", key: "cashPayments" },
+  { name: "refunds", key: "refunds" },
+] as const;
 
 export function TillForm() {
+  const t = useTranslations("tillPage");
   const formRef = useRef<HTMLFormElement>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,16 +30,16 @@ export function TillForm() {
       setError(result.error);
       return;
     }
-    setSuccess(`Saved. Variance: ${result.variance!.toFixed(2)} SAR.`);
+    setSuccess(t("saved", { variance: result.variance!.toFixed(2) }));
     formRef.current?.reset();
   }
 
   return (
     <form ref={formRef} action={onSubmit} className="space-y-3 rounded-2xl border border-border bg-surface p-4">
       <div className="grid grid-cols-2 gap-3">
-        {fields.map((f) => (
+        {fieldKeys.map((f) => (
           <label key={f.name} className="block">
-            <span className="mb-1 block text-xs font-medium text-muted-foreground">{f.label}</span>
+            <span className="mb-1 block text-xs font-medium text-muted-foreground">{t(f.key)}</span>
             <input
               name={f.name}
               type="number"
@@ -51,7 +53,7 @@ export function TillForm() {
       <textarea
         name="notes"
         rows={2}
-        placeholder="Notes (required if variance is large)"
+        placeholder={t("notesPlaceholder")}
         className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
@@ -61,7 +63,7 @@ export function TillForm() {
         disabled={saving}
         className="w-full rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
-        {saving ? "Saving..." : "Submit till handover"}
+        {saving ? t("submitting") : t("submit")}
       </button>
     </form>
   );

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { CheckCircle2 } from "lucide-react";
 import { submitChecklist } from "@/lib/actions/checklists";
 
@@ -12,6 +13,7 @@ export function RunChecklist({
   templateId: string;
   items: { id: string; label: string; is_required: boolean }[];
 }) {
+  const t = useTranslations("checklists");
   const router = useRouter();
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -37,13 +39,13 @@ export function RunChecklist({
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
         <CheckCircle2 className="h-14 w-14 text-emerald-500" />
-        <h2 className="text-lg font-semibold">Checklist completed</h2>
+        <h2 className="text-lg font-semibold">{t("completed")}</h2>
         <button
           type="button"
           onClick={() => router.push("/checklists")}
           className="mt-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-primary-foreground"
         >
-          Back to checklists
+          {t("backToChecklists")}
         </button>
       </div>
     );
@@ -77,7 +79,7 @@ export function RunChecklist({
         disabled={submitting || !allRequiredChecked}
         className="mt-2 w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-40"
       >
-        {submitting ? "Submitting..." : "Submit checklist"}
+        {submitting ? t("submitting") : t("submit")}
       </button>
     </div>
   );

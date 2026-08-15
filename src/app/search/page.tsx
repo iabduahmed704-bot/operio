@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { ChevronLeft } from "lucide-react";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { requireAuth } from "@/lib/auth";
 import { SearchClient } from "./SearchClient";
 
 export default async function SearchPage() {
+  const t = await getTranslations("searchPage");
   await requireAuth();
 
   return (
@@ -13,7 +15,7 @@ export default async function SearchPage() {
         <Link href="/" className="text-muted-foreground">
           <ChevronLeft className="h-5 w-5" />
         </Link>
-        <h1 className="text-lg font-semibold">Search</h1>
+        <h1 className="text-lg font-semibold">{t("title")}</h1>
       </header>
       <SearchClient />
       <MobileNav />

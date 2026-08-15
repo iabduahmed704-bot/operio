@@ -9,6 +9,7 @@ export default async function ProfilePage() {
   const tMore = await getTranslations("more");
   const tOnboarding = await getTranslations("onboarding");
   const tCommon = await getTranslations("common");
+  const t = await getTranslations("profilePage");
   const user = await requireAuth();
 
   return (
@@ -30,7 +31,7 @@ export default async function ProfilePage() {
             email: tOnboarding("ownerEmail"),
             phone: tOnboarding("managerPhone"),
             save: tCommon("save"),
-            saved: "Saved",
+            saved: t("saved"),
           }}
         />
       </main>

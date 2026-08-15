@@ -6,8 +6,17 @@ import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { InviteForm } from "./InviteForm";
 
+const roleKey: Record<string, string> = {
+  organization_owner: "roleOrganizationOwner",
+  operations_manager: "roleOperationsManager",
+  branch_manager: "roleBranchManager",
+  supervisor: "roleSupervisor",
+  employee: "roleEmployee",
+};
+
 export default async function EmployeesPage() {
   const tNav = await getTranslations("nav");
+  const t = await getTranslations("employeesPage");
   const user = await requireAuth();
   const supabase = await createClient();
 
@@ -41,7 +50,9 @@ export default async function EmployeesPage() {
                 <p className="text-xs text-muted-foreground">{member.email}</p>
               </div>
               <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                {member.org_role?.replace(/_/g, " ")}
+                {member.org_role && roleKey[member.org_role]
+                  ? t(roleKey[member.org_role] as "roleEmployee")
+                  : member.org_role}
               </span>
             </li>
           ))}

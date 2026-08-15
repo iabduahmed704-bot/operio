@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Search, ListChecks, Trash2, AlertOctagon, User, Building2 } from "lucide-react";
 import { runSearch } from "@/lib/actions/search";
 import type { SearchResult } from "@/lib/services/search";
@@ -15,6 +16,7 @@ const iconByKind: Record<SearchResult["kind"], typeof Search> = {
 };
 
 export function SearchClient() {
+  const t = useTranslations("searchPage");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isPending, startTransition] = useTransition();
@@ -34,16 +36,16 @@ export function SearchClient() {
         <input
           value={query}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="Search tasks, waste, incidents, employees, branches..."
+          placeholder={t("placeholder")}
           className="w-full bg-transparent text-sm outline-none"
           autoFocus
         />
       </div>
 
-      {isPending && <p className="mt-4 text-center text-sm text-muted-foreground">Searching...</p>}
+      {isPending && <p className="mt-4 text-center text-sm text-muted-foreground">{t("searching")}</p>}
 
       {!isPending && query.trim() && results.length === 0 && (
-        <p className="mt-4 text-center text-sm text-muted-foreground">No results.</p>
+        <p className="mt-4 text-center text-sm text-muted-foreground">{t("noResults")}</p>
       )}
 
       <ul className="mt-4 space-y-2">

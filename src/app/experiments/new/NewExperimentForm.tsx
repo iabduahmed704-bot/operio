@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { createMenuExperiment } from "@/lib/actions/experiments";
 
 export function NewExperimentForm() {
+  const t = useTranslations("experimentsPage");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,20 +24,20 @@ export function NewExperimentForm() {
       <input
         name="productName"
         required
-        placeholder="Product name"
+        placeholder={t("titlePlaceholder")}
         className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-primary"
       />
       <textarea
         name="recipeNotes"
         rows={4}
-        placeholder="Recipe notes"
+        placeholder={t("recipePlaceholder")}
         className="w-full resize-none rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-primary"
       />
       <input
         name="cost"
         type="number"
         step="0.01"
-        placeholder="Cost per unit (SAR)"
+        placeholder={t("costPlaceholder")}
         className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-primary"
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
@@ -44,7 +46,7 @@ export function NewExperimentForm() {
         disabled={saving}
         className="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
-        {saving ? "Creating..." : "Create experiment"}
+        {saving ? t("creating") : t("createButton")}
       </button>
     </form>
   );

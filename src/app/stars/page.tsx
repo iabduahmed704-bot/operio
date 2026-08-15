@@ -1,10 +1,12 @@
 import { Star as StarIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { AwardStarForm } from "./AwardStarForm";
 
 export default async function StarsPage() {
+  const t = await getTranslations("starsPage");
   const user = await requireAuth();
   const supabase = await createClient();
 
@@ -29,7 +31,7 @@ export default async function StarsPage() {
   return (
     <div className="flex min-h-screen flex-col pb-24 md:pb-0">
       <header className="border-b border-border px-4 py-6 md:px-8">
-        <h1 className="text-xl font-semibold">Stars Board</h1>
+        <h1 className="text-xl font-semibold">{t("title")}</h1>
       </header>
 
       <main className="flex-1 space-y-4 px-4 py-6 md:px-8">
@@ -46,7 +48,7 @@ export default async function StarsPage() {
                 <div>
                   <p className="text-sm font-medium">{name ?? "Unknown"}</p>
                   <p className="text-xs text-muted-foreground">
-                    {s.period === "week" ? "Star of the Week" : "Star of the Month"} — {s.period_label}
+                    {s.period === "week" ? t("starOfWeek") : t("starOfMonth")} — {s.period_label}
                   </p>
                   {s.note && <p className="mt-1 text-sm">{s.note}</p>}
                 </div>

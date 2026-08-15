@@ -9,6 +9,7 @@ import { SettingsForm } from "./SettingsForm";
 export default async function SettingsPage() {
   const tMore = await getTranslations("more");
   const tCommon = await getTranslations("common");
+  const t = await getTranslations("settingsPage");
   const user = await requireAuth();
   const supabase = await createClient();
 
@@ -35,11 +36,11 @@ export default async function SettingsPage() {
           currency={org?.currency ?? "SAR"}
           canEdit={user.org_role === "organization_owner"}
           labels={{
-            locale: "Default language",
-            currency: "Currency",
+            locale: t("defaultLanguage"),
+            currency: t("currency"),
             save: tCommon("save"),
-            saved: "Saved",
-            readonly: "Only the organization owner can change these settings.",
+            saved: t("saved"),
+            readonly: t("readonly"),
           }}
         />
       </main>

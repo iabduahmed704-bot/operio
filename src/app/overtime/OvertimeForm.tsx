@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { submitOvertime } from "@/lib/actions/overtime";
 
 export function OvertimeForm() {
+  const t = useTranslations("overtimePage");
   const formRef = useRef<HTMLFormElement>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -27,14 +29,14 @@ export function OvertimeForm() {
         type="number"
         step="0.5"
         required
-        placeholder="Hours"
+        placeholder={t("hoursPlaceholder")}
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       <textarea
         name="reason"
         required
         rows={2}
-        placeholder="Reason for overtime"
+        placeholder={t("reasonPlaceholder")}
         className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
@@ -43,7 +45,7 @@ export function OvertimeForm() {
         disabled={saving}
         className="w-full rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
-        {saving ? "Submitting..." : "Submit overtime"}
+        {saving ? t("submitting") : t("submit")}
       </button>
     </form>
   );

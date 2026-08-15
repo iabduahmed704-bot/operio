@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { CheckCircle2 } from "lucide-react";
 import { approveManualPurchase } from "@/lib/actions/purchases";
 
@@ -20,6 +21,7 @@ export function PurchaseList({
   initialItems: PurchaseRow[];
   canApprove: boolean;
 }) {
+  const t = useTranslations("purchasesPage");
   const [items, setItems] = useState(initialItems);
   const [isPending, startTransition] = useTransition();
 
@@ -33,7 +35,7 @@ export function PurchaseList({
   }
 
   if (items.length === 0) {
-    return <p className="py-8 text-center text-sm text-muted-foreground">No purchases logged yet.</p>;
+    return <p className="py-8 text-center text-sm text-muted-foreground">{t("empty")}</p>;
   }
 
   return (
@@ -53,7 +55,7 @@ export function PurchaseList({
                   : "rounded-full bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-500"
               }
             >
-              {item.approved ? "Approved" : "Pending approval"}
+              {item.approved ? t("approved") : t("pendingApproval")}
             </span>
             {canApprove && !item.approved && (
               <button
@@ -62,7 +64,7 @@ export function PurchaseList({
                 disabled={isPending}
                 className="flex items-center gap-1 text-xs font-medium text-primary disabled:opacity-60"
               >
-                <CheckCircle2 className="h-3.5 w-3.5" /> Approve
+                <CheckCircle2 className="h-3.5 w-3.5" /> {t("approve")}
               </button>
             )}
           </div>

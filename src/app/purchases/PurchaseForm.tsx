@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { submitManualPurchase } from "@/lib/actions/purchases";
 
 export function PurchaseForm() {
+  const t = useTranslations("purchasesPage");
   const formRef = useRef<HTMLFormElement>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,12 +27,12 @@ export function PurchaseForm() {
       <input
         name="item"
         required
-        placeholder="Item purchased"
+        placeholder={t("itemPlaceholder")}
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       <input
         name="supplier"
-        placeholder="Supplier (optional)"
+        placeholder={t("supplierPlaceholder")}
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       <input
@@ -38,14 +40,14 @@ export function PurchaseForm() {
         type="number"
         step="0.01"
         required
-        placeholder="Amount (SAR)"
+        placeholder={t("amountPlaceholder")}
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       <textarea
         name="reason"
         required
         rows={2}
-        placeholder="Why was this purchase needed?"
+        placeholder={t("reasonPlaceholder")}
         className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
@@ -54,7 +56,7 @@ export function PurchaseForm() {
         disabled={saving}
         className="w-full rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
-        {saving ? "Submitting..." : "Submit purchase"}
+        {saving ? t("submitting") : t("submit")}
       </button>
     </form>
   );

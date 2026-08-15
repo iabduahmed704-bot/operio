@@ -2,6 +2,7 @@
 
 import { useState, useTransition, type ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { CheckCircle2, Camera, X } from "lucide-react";
 import { addWalkStop, completeWalk } from "@/lib/actions/walk";
 import { createClient } from "@/lib/supabase/client";
@@ -27,6 +28,7 @@ export function WalkSession({
   organizationId: string | null;
   branchId: string | null;
 }) {
+  const t = useTranslations("walkPage");
   const router = useRouter();
   const [stops, setStops] = useState(initialStops);
   const [issue, setIssue] = useState("");
@@ -101,14 +103,14 @@ export function WalkSession({
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
         <CheckCircle2 className="h-14 w-14 text-emerald-500" />
-        <h2 className="text-lg font-semibold">Walk report complete</h2>
-        <p className="text-sm text-muted-foreground">{stops.length} stops recorded.</p>
+        <h2 className="text-lg font-semibold">{t("complete")}</h2>
+        <p className="text-sm text-muted-foreground">{t("stopsRecorded", { count: stops.length })}</p>
         <button
           type="button"
           onClick={() => router.push("/")}
           className="mt-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-primary-foreground"
         >
-          Back to home
+          {t("backToHome")}
         </button>
       </div>
     );
@@ -126,7 +128,9 @@ export function WalkSession({
             )}
             {s.issue && <p className="font-medium">{s.issue}</p>}
             {s.note && <p className="text-muted-foreground">{s.note}</p>}
-            {s.action_taken && <p className="text-xs text-primary">Action: {s.action_taken}</p>}
+            {s.action_taken && (
+              <p className="text-xs text-primary">{t("actionLabel", { action: s.action_taken })}</p>
+            )}
           </div>
         ))}
       </div>
@@ -142,7 +146,7 @@ export function WalkSession({
           ) : (
             <>
               <Camera className="h-6 w-6" />
-              <span className="text-xs">Add photo</span>
+              <span className="text-xs">{t("addPhoto")}</span>
             </>
           )}
         </label>
@@ -163,26 +167,26 @@ export function WalkSession({
             }}
             className="inline-flex items-center gap-1 text-xs text-red-500"
           >
-            <X className="h-3 w-3" /> Remove photo
+            <X className="h-3 w-3" /> {t("removePhoto")}
           </button>
         )}
 
         <input
           value={issue}
           onChange={(e) => setIssue(e.target.value)}
-          placeholder="Issue"
+          placeholder={t("issuePlaceholder")}
           className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary"
         />
         <input
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          placeholder="Note"
+          placeholder={t("notePlaceholder")}
           className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary"
         />
         <input
           value={actionTaken}
           onChange={(e) => setActionTaken(e.target.value)}
-          placeholder="Action taken"
+          placeholder={t("actionPlaceholder")}
           className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary"
         />
         {error && <p className="text-sm text-red-500">{error}</p>}
@@ -192,7 +196,7 @@ export function WalkSession({
           disabled={isPending}
           className="w-full rounded-xl border border-border px-4 py-2.5 text-sm font-medium disabled:opacity-60"
         >
-          Add stop
+          {t("addStop")}
         </button>
       </div>
 
@@ -202,7 +206,7 @@ export function WalkSession({
         disabled={isPending}
         className="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
-        Finish walk & generate report
+        {t("finish")}
       </button>
     </div>
   );

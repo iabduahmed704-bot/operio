@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { submitBusinessTrip } from "@/lib/actions/trips";
 
 export function TripForm() {
+  const t = useTranslations("tripsPage");
   const formRef = useRef<HTMLFormElement>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,13 +27,13 @@ export function TripForm() {
       <input
         name="destination"
         required
-        placeholder="Destination"
+        placeholder={t("destinationPlaceholder")}
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       <input
         name="purpose"
         required
-        placeholder="Purpose"
+        placeholder={t("purposePlaceholder")}
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       <input
@@ -39,7 +41,7 @@ export function TripForm() {
         type="number"
         step="0.1"
         required
-        placeholder="Distance (km)"
+        placeholder={t("distancePlaceholder")}
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
@@ -48,7 +50,7 @@ export function TripForm() {
         disabled={saving}
         className="w-full rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
-        {saving ? "Submitting..." : "Submit trip"}
+        {saving ? t("submitting") : t("submit")}
       </button>
     </form>
   );

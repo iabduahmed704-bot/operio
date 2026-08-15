@@ -1,4 +1,5 @@
 import "server-only";
+import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 
 export type SearchResult = {
@@ -12,6 +13,8 @@ export type SearchResult = {
 export async function searchOrganization(organizationId: string, query: string): Promise<SearchResult[]> {
   if (!query.trim()) return [];
   const supabase = await createClient();
+  const t = await getTranslations("searchPage");
+  const tNav = await getTranslations("nav");
   const like = `%${query}%`;
 
   const [tasks, waste, incidents, employees, branches] = await Promise.all([
@@ -58,7 +61,7 @@ export async function searchOrganization(organizationId: string, query: string):
       kind: "waste" as const,
       id: w.id,
       title: w.description,
-      subtitle: "Waste report",
+      subtitle: t("wasteReport"),
       href: "/reports",
     })),
     ...(incidents.data ?? []).map((i) => ({
@@ -79,7 +82,7 @@ export async function searchOrganization(organizationId: string, query: string):
       kind: "branch" as const,
       id: b.id,
       title: b.name,
-      subtitle: "Branch",
+      subtitle: tNav("branches"),
       href: "/branches",
     })),
   ];

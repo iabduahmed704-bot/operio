@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { Coffee } from "lucide-react";
 import { startBreak, endBreak } from "@/lib/actions/breaks";
 
 export function BreakControl({ isOnBreak }: { isOnBreak: boolean }) {
+  const t = useTranslations("breaksPage");
   const [onBreak, setOnBreak] = useState(isOnBreak);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -24,9 +26,7 @@ export function BreakControl({ isOnBreak }: { isOnBreak: boolean }) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-6 text-center">
       <Coffee className={`mx-auto h-10 w-10 ${onBreak ? "text-amber-500" : "text-muted-foreground"}`} />
-      <p className="mt-2 text-sm text-muted-foreground">
-        {onBreak ? "You are currently on break" : "You are not on break"}
-      </p>
+      <p className="mt-2 text-sm text-muted-foreground">{onBreak ? t("onBreak") : t("notOnBreak")}</p>
       {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
       <button
         type="button"
@@ -38,7 +38,7 @@ export function BreakControl({ isOnBreak }: { isOnBreak: boolean }) {
             : "mt-4 w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
         }
       >
-        {onBreak ? "End break" : "Start break"}
+        {onBreak ? t("endBreak") : t("startBreak")}
       </button>
     </div>
   );

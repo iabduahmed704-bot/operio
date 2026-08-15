@@ -16,8 +16,19 @@ type FeedRow = {
 
 type WalkRow = { id: string; type: string; started_at: string; stopCount: number; photoCount: number };
 
+const walkTypeKey: Record<string, string> = {
+  opening: "typeOpening",
+  closing: "typeClosing",
+  food_safety: "typeFoodSafety",
+  cleaning: "typeCleaning",
+  equipment: "typeEquipment",
+  store_readiness: "typeStoreReadiness",
+  custom: "typeCustom",
+};
+
 export default async function ReportsPage() {
   const t = await getTranslations("reports");
+  const tWalk = await getTranslations("walkPage");
   const user = await requireAuth();
   const supabase = await createClient();
 
@@ -112,9 +123,13 @@ export default async function ReportsPage() {
                   >
                     <Footprints className="h-5 w-5 shrink-0 text-primary" />
                     <div className="flex-1">
-                      <p className="text-sm font-medium">{w.type.replace(/_/g, " ")} walk</p>
+                      <p className="text-sm font-medium">
+                        {t("walkLabel", {
+                          type: walkTypeKey[w.type] ? tWalk(walkTypeKey[w.type] as "typeOpening") : w.type,
+                        })}
+                      </p>
                       <p className="text-xs text-muted-foreground">
-                        {w.stopCount} stops · {new Date(w.started_at).toLocaleDateString()}
+                        {w.stopCount} {t("stops")} · {new Date(w.started_at).toLocaleDateString()}
                       </p>
                     </div>
                     {w.photoCount > 0 && (

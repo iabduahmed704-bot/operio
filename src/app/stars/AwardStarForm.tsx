@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { awardStar } from "@/lib/actions/stars";
 
 export function AwardStarForm({ employees }: { employees: { id: string; full_name: string }[] }) {
+  const t = useTranslations("starsPage");
   const formRef = useRef<HTMLFormElement>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -27,7 +29,7 @@ export function AwardStarForm({ employees }: { employees: { id: string; full_nam
         required
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       >
-        <option value="">Select employee</option>
+        <option value="">{t("selectEmployee")}</option>
         {employees.map((e) => (
           <option key={e.id} value={e.id}>
             {e.full_name}
@@ -39,13 +41,13 @@ export function AwardStarForm({ employees }: { employees: { id: string; full_nam
         defaultValue="week"
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       >
-        <option value="week">Star of the Week</option>
-        <option value="month">Star of the Month</option>
+        <option value="week">{t("starOfWeek")}</option>
+        <option value="month">{t("starOfMonth")}</option>
       </select>
       <textarea
         name="note"
         rows={2}
-        placeholder="Why? (optional)"
+        placeholder={t("whyPlaceholder")}
         className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
@@ -54,7 +56,7 @@ export function AwardStarForm({ employees }: { employees: { id: string; full_nam
         disabled={saving}
         className="w-full rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
-        {saving ? "Saving..." : "Award star"}
+        {saving ? t("saving") : t("award")}
       </button>
     </form>
   );

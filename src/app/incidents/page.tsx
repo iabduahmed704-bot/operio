@@ -1,16 +1,18 @@
+import { getTranslations } from "next-intl/server";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 
-const categoryLabels: Record<string, string> = {
-  issue: "Issue",
-  mistake: "Mistake",
-  equipment: "Equipment problem",
-  "photo-note": "Photo note",
-  other: "Other",
+const categoryKey: Record<string, string> = {
+  issue: "categoryIssue",
+  mistake: "categoryMistake",
+  equipment: "categoryEquipment",
+  "photo-note": "categoryPhotoNote",
+  other: "categoryOther",
 };
 
 export default async function IncidentsPage() {
+  const t = await getTranslations("incidentsPage");
   const user = await requireAuth();
   const supabase = await createClient();
 
@@ -32,23 +34,24 @@ export default async function IncidentsPage() {
 
   const topCategories = Object.entries(byCategory).sort((a, b) => b[1] - a[1]);
 
+  const label = (category: string) =>
+    categoryKey[category] ? t(categoryKey[category] as "categoryIssue") : category;
+
   return (
     <div className="flex min-h-screen flex-col pb-24 md:pb-0">
       <header className="border-b border-border px-4 py-6 md:px-8">
-        <h1 className="text-xl font-semibold">Incidents</h1>
-        <p className="text-sm text-muted-foreground">
-          Focused on learning and prevention — not punishment.
-        </p>
+        <h1 className="text-xl font-semibold">{t("title")}</h1>
+        <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
       </header>
 
       <main className="flex-1 space-y-4 px-4 py-6 md:px-8">
         {topCategories.length > 0 && (
           <div className="rounded-2xl border border-border bg-surface p-4">
-            <p className="mb-3 text-sm font-semibold">Recurring problems</p>
+            <p className="mb-3 text-sm font-semibold">{t("recurringProblems")}</p>
             <div className="space-y-2">
               {topCategories.map(([category, count]) => (
                 <div key={category} className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">{categoryLabels[category] ?? category}</span>
+                  <span className="text-muted-foreground">{label(category)}</span>
                   <span className="font-medium">{count}</span>
                 </div>
               ))}
@@ -57,14 +60,14 @@ export default async function IncidentsPage() {
         )}
 
         {rows.length === 0 ? (
-          <p className="py-8 text-center text-sm text-muted-foreground">No incidents logged yet.</p>
+          <p className="py-8 text-center text-sm text-muted-foreground">{t("empty")}</p>
         ) : (
           <ul className="space-y-2">
             {rows.map((row) => (
               <li key={row.id} className="rounded-2xl border border-border bg-surface p-4">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-medium uppercase tracking-wide text-primary">
-                    {categoryLabels[row.category] ?? row.category}
+                    {label(row.category)}
                   </span>
                   <span
                     className={

@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
@@ -5,6 +6,7 @@ import { PurchaseForm } from "./PurchaseForm";
 import { PurchaseList } from "./PurchaseList";
 
 export default async function PurchasesPage() {
+  const t = await getTranslations("purchasesPage");
   const user = await requireAuth();
   const supabase = await createClient();
 
@@ -24,7 +26,7 @@ export default async function PurchasesPage() {
   return (
     <div className="flex min-h-screen flex-col pb-24 md:pb-0">
       <header className="border-b border-border px-4 py-6 md:px-8">
-        <h1 className="text-xl font-semibold">Manual Purchases</h1>
+        <h1 className="text-xl font-semibold">{t("title")}</h1>
       </header>
 
       <main className="flex-1 space-y-4 px-4 py-6 md:px-8">

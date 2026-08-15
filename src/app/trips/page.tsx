@@ -1,9 +1,11 @@
+import { getTranslations } from "next-intl/server";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { TripForm } from "./TripForm";
 
 export default async function TripsPage() {
+  const t = await getTranslations("tripsPage");
   const user = await requireAuth();
   const supabase = await createClient();
 
@@ -19,14 +21,14 @@ export default async function TripsPage() {
   return (
     <div className="flex min-h-screen flex-col pb-24 md:pb-0">
       <header className="border-b border-border px-4 py-6 md:px-8">
-        <h1 className="text-xl font-semibold">Business Trips</h1>
+        <h1 className="text-xl font-semibold">{t("title")}</h1>
       </header>
 
       <main className="flex-1 space-y-4 px-4 py-6 md:px-8">
         <TripForm />
 
         {(!trips || trips.length === 0) ? (
-          <p className="py-8 text-center text-sm text-muted-foreground">No trips logged yet.</p>
+          <p className="py-8 text-center text-sm text-muted-foreground">{t("empty")}</p>
         ) : (
           <ul className="space-y-2">
             {trips.map((trip) => (
@@ -36,7 +38,7 @@ export default async function TripsPage() {
                   <span className="text-sm font-semibold">{trip.compensation.toFixed(2)} SAR</span>
                 </div>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  {trip.purpose} · {trip.distance_km} km
+                  {trip.purpose} · {trip.distance_km} {t("km")}
                 </p>
               </li>
             ))}

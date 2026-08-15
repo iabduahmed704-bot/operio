@@ -1,16 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { generateInviteCode } from "@/lib/actions/invite";
 
-const roles = [
-  { value: "operations_manager", label: "Operations Manager" },
-  { value: "branch_manager", label: "Branch Manager" },
-  { value: "supervisor", label: "Supervisor" },
-  { value: "employee", label: "Employee" },
-];
+const roleKeys = [
+  { value: "operations_manager", key: "roleOperationsManager" },
+  { value: "branch_manager", key: "roleBranchManager" },
+  { value: "supervisor", key: "roleSupervisor" },
+  { value: "employee", key: "roleEmployee" },
+] as const;
 
 export function InviteForm() {
+  const t = useTranslations("employeesPage");
   const [code, setCode] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
@@ -35,9 +37,9 @@ export function InviteForm() {
         defaultValue="employee"
         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
       >
-        {roles.map((r) => (
+        {roleKeys.map((r) => (
           <option key={r.value} value={r.value}>
-            {r.label}
+            {t(r.key)}
           </option>
         ))}
       </select>
@@ -46,7 +48,7 @@ export function InviteForm() {
 
       {code && (
         <div className="rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-center">
-          <p className="text-xs text-muted-foreground">Share this code with the new team member:</p>
+          <p className="text-xs text-muted-foreground">{t("shareCode")}</p>
           <p className="mt-1 text-lg font-mono font-semibold tracking-widest">{code}</p>
         </div>
       )}
@@ -56,7 +58,7 @@ export function InviteForm() {
         disabled={generating}
         className="w-full rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
-        {generating ? "Generating..." : "Generate invite code"}
+        {generating ? t("generating") : t("generate")}
       </button>
     </form>
   );
