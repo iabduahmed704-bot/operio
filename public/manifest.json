@@ -1,0 +1,12 @@
+{
+  "name": "Operation Hub",
+  "short_name": "Operation Hub",
+  "description": "The operating system for restaurant operations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0A1E",
+  "theme_color": "#5B21B6",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
