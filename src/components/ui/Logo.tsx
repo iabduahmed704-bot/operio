@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export function Logo({ height = 28 }: { height?: number }) {
+export function Logo({ height = 40 }: { height?: number }) {
   const width = Math.round(height * (1774 / 887));
 
   return (

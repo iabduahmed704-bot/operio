@@ -21,7 +21,7 @@ export default async function DashboardPage() {
     <div className="flex min-h-screen flex-col pb-24 md:pb-0">
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-background/80 px-4 py-4 backdrop-blur md:px-8">
         <div>
-          <Logo height={24} />
+          <Logo height={36} />
           <p className="mt-1 text-sm text-muted-foreground">{t("today")}</p>
         </div>
         <div className="flex items-center gap-2">
