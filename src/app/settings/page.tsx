@@ -22,7 +22,7 @@ export default async function SettingsPage() {
     : { data: null };
 
   return (
-    <div className="flex min-h-screen flex-col pb-24 md:pb-0">
+    <div className="flex min-h-screen flex-col pb-24">
       <header className="flex items-center gap-3 border-b border-border px-4 py-4 md:px-8">
         <Link href="/more" className="text-muted-foreground">
           <ChevronLeft className="h-5 w-5" />

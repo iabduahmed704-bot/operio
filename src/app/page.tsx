@@ -18,7 +18,7 @@ export default async function DashboardPage() {
     : { wasteTodaySar: 0, taskCompliancePct: 0, outOfStock: 0, criticalIssues: 0 };
 
   return (
-    <div className="flex min-h-screen flex-col pb-24 md:pb-0">
+    <div className="flex min-h-screen flex-col pb-24">
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-background/80 px-4 py-4 backdrop-blur md:px-8">
         <div>
           <Logo height={36} />

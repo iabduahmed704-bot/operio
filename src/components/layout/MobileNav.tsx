@@ -25,7 +25,8 @@ export function MobileNav() {
   ];
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-around border-t border-border bg-surface/90 px-2 py-2 backdrop-blur-md md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/90 px-2 py-2 backdrop-blur-md">
+      <div className="mx-auto flex max-w-md items-center justify-around">
       {items.map(({ key, href, icon: Icon, primary }) => {
         const active = pathname === href;
         if (primary) {
@@ -72,6 +73,7 @@ export function MobileNav() {
           </Link>
         );
       })}
+      </div>
     </nav>
   );
 }

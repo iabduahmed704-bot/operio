@@ -10,7 +10,7 @@ export default async function KpisPage() {
   const kpis = user.organization_id ? await getBranchKpis(user.organization_id) : [];
 
   return (
-    <div className="flex min-h-screen flex-col pb-24 md:pb-0">
+    <div className="flex min-h-screen flex-col pb-24">
       <header className="border-b border-border px-4 py-6 md:px-8">
         <h1 className="text-xl font-semibold">{t("title")}</h1>
       </header>
