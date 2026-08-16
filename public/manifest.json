@@ -1,6 +1,6 @@
 {
-  "name": "Operation Hub",
-  "short_name": "Operation Hub",
+  "name": "Operio",
+  "short_name": "Operio",
   "description": "The operating system for restaurant operations.",
   "start_url": "/",
   "display": "standalone",

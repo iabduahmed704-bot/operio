@@ -6,11 +6,11 @@ import { rtlLocales } from "@/i18n/request";
 import { ServiceWorkerRegister } from "@/components/pwa/ServiceWorkerRegister";
 
 export const metadata: Metadata = {
-  title: "Operation Hub",
+  title: "Operio",
   description: "The operating system for restaurant operations.",
   manifest: "/manifest.json",
   icons: { icon: "/icon.svg", apple: "/icon.svg" },
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Operation Hub" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Operio" },
 };
 
 export const viewport: Viewport = {

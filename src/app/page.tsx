@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { Logo } from "@/components/ui/Logo";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { DashboardHero } from "@/components/dashboard/DashboardHero";
@@ -10,7 +11,6 @@ import { getTodayStats } from "@/lib/services/dashboard";
 
 export default async function DashboardPage() {
   const t = await getTranslations("dashboard");
-  const tApp = await getTranslations("app");
   const user = await requireAuth();
 
   const stats = user.organization_id
@@ -21,8 +21,8 @@ export default async function DashboardPage() {
     <div className="flex min-h-screen flex-col pb-24 md:pb-0">
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-background/80 px-4 py-4 backdrop-blur md:px-8">
         <div>
-          <p className="text-lg font-semibold tracking-tight">{tApp("name")}</p>
-          <p className="text-sm text-muted-foreground">{t("today")}</p>
+          <Logo height={24} />
+          <p className="mt-1 text-sm text-muted-foreground">{t("today")}</p>
         </div>
         <div className="flex items-center gap-2">
           <Link

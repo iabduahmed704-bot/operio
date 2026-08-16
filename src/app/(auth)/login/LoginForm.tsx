@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { loginAction, type LoginState } from "@/lib/actions/auth";
+import { Logo } from "@/components/ui/Logo";
 
 export function LoginForm() {
   const t = useTranslations("auth");
@@ -13,6 +14,9 @@ export function LoginForm() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4">
       <form action={formAction} className="w-full max-w-sm space-y-4">
+        <div className="mb-2 flex justify-center">
+          <Logo height={32} />
+        </div>
         <h1 className="text-center text-xl font-semibold">{t("login")}</h1>
 
         <label className="block">

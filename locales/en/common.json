@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Operation Hub"
+    "name": "Operio"
   },
   "nav": {
     "home": "Home",
@@ -56,7 +56,7 @@
     "backToHome": "Back to Home"
   },
   "onboarding": {
-    "welcome": "Welcome to Operation Hub",
+    "welcome": "Welcome to Operio",
     "welcomeSubtitle": "Replace paper checklists, WhatsApp chaos, and spreadsheets with one operations platform.",
     "createOrganization": "Create your organization",
     "ownerName": "Your name",
@@ -82,7 +82,7 @@
     "templateCloudKitchen": "Cloud Kitchen",
     "templateCustom": "Custom",
     "trialEndsIn": "Trial ends in {days} days",
-    "startUsing": "Start using Operation Hub",
+    "startUsing": "Start using Operio",
     "next": "Next",
     "back": "Back",
     "finish": "Finish setup",

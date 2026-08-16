@@ -46,3 +46,18 @@ body {
 [dir="rtl"] body {
   font-family: var(--font-sans), "Tahoma", Arial, sans-serif;
 }
+
+.logo-light {
+  display: block;
+}
+.logo-dark {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  .logo-light {
+    display: none;
+  }
+  .logo-dark {
+    display: block;
+  }
+}
