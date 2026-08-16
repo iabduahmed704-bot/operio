@@ -4,8 +4,16 @@ import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { HandoverForm } from "./HandoverForm";
 
+const shiftKey: Record<string, string> = {
+  opening: "typeOpening",
+  morning: "typeMorning",
+  afternoon: "typeAfternoon",
+  closing: "typeClosing",
+};
+
 export default async function ShiftsPage() {
   const tNav = await getTranslations("nav");
+  const t = await getTranslations("shiftsPage");
   const user = await requireAuth();
   const supabase = await createClient();
 
@@ -32,7 +40,7 @@ export default async function ShiftsPage() {
             <li key={h.id} className="rounded-2xl border border-border bg-surface p-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-medium uppercase tracking-wide text-primary">
-                  {h.shift_label}
+                  {shiftKey[h.shift_label] ? t(shiftKey[h.shift_label] as "typeOpening") : h.shift_label}
                 </span>
                 <span className="text-xs text-muted-foreground">
                   {new Date(h.created_at).toLocaleString()}

@@ -184,6 +184,15 @@
     "walkLabel": "جولة {type}",
     "stops": "محطة"
   },
+  "shiftsPage": {
+    "typeOpening": "الافتتاح",
+    "typeMorning": "الصباح",
+    "typeAfternoon": "بعد الظهر",
+    "typeClosing": "الإغلاق",
+    "notesPlaceholder": "ما الذي يحتاج الفريق التالي معرفته؟",
+    "submit": "إرسال تسليم الوردية",
+    "submitting": "جارٍ الإرسال..."
+  },
   "tillPage": {
     "title": "تسليم الوردية النقدي",
     "openingCash": "النقد الافتتاحي",

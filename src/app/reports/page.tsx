@@ -26,9 +26,16 @@ const walkTypeKey: Record<string, string> = {
   custom: "typeCustom",
 };
 
+const severityKey: Record<string, string> = {
+  low: "severityLow",
+  medium: "severityMedium",
+  high: "severityHigh",
+};
+
 export default async function ReportsPage() {
   const t = await getTranslations("reports");
   const tWalk = await getTranslations("walkPage");
+  const tCapture = await getTranslations("capture");
   const user = await requireAuth();
   const supabase = await createClient();
 
@@ -165,7 +172,9 @@ export default async function ReportsPage() {
                               : "rounded-full bg-muted-foreground/10 px-2 py-0.5 text-xs font-medium text-muted-foreground"
                         }
                       >
-                        {row.severity}
+                        {severityKey[row.severity]
+                          ? tCapture(severityKey[row.severity] as "severityLow")
+                          : row.severity}
                       </span>
                     </div>
                     <p className="mt-1 text-sm">{row.description}</p>

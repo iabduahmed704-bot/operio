@@ -184,6 +184,15 @@
     "walkLabel": "{type} walk",
     "stops": "stops"
   },
+  "shiftsPage": {
+    "typeOpening": "opening",
+    "typeMorning": "morning",
+    "typeAfternoon": "afternoon",
+    "typeClosing": "closing",
+    "notesPlaceholder": "What does the next shift need to know?",
+    "submit": "Submit handover",
+    "submitting": "Submitting..."
+  },
   "tillPage": {
     "title": "Till Handover",
     "openingCash": "Opening cash",
