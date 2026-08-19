@@ -1,8 +1,9 @@
-import { Star as StarIcon } from "lucide-react";
+import { Star as StarIcon, TrendingUp } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
+import { getEmployeeKpisForBranch } from "@/lib/services/employee-kpi";
 import { AwardStarForm } from "./AwardStarForm";
 
 export default async function StarsPage() {
@@ -14,7 +15,7 @@ export default async function StarsPage() {
     user.org_role ?? ""
   );
 
-  const [{ data: stars }, { data: employees }] = await Promise.all([
+  const [{ data: stars }, { data: employees }, kpis] = await Promise.all([
     user.organization_id
       ? supabase
           .from("stars")
@@ -26,7 +27,12 @@ export default async function StarsPage() {
     canAward && user.organization_id
       ? supabase.from("users").select("id, full_name").eq("organization_id", user.organization_id)
       : Promise.resolve({ data: [] }),
+    canAward && user.organization_id && user.branch_id
+      ? getEmployeeKpisForBranch(user.organization_id, user.branch_id)
+      : Promise.resolve([]),
   ]);
+
+  const topCandidate = kpis.find((k) => k.score > 0);
 
   return (
     <div className="flex min-h-screen flex-col pb-24">
@@ -35,6 +41,24 @@ export default async function StarsPage() {
       </header>
 
       <main className="flex-1 space-y-4 px-4 py-6 md:px-8">
+        {canAward && topCandidate && (
+          <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
+            <p className="flex items-center gap-2 text-sm font-medium text-primary">
+              <TrendingUp className="h-4 w-4" />
+              {t("kpiSuggestionTitle")}
+            </p>
+            <p className="mt-1 text-sm">
+              {t("kpiSuggestionBody", { name: topCandidate.fullName, score: topCandidate.score })}
+            </p>
+            <ul className="mt-2 grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+              <li>{t("kpiTasks")}: {topCandidate.breakdown.taskCompletionPct}%</li>
+              <li>{t("kpiChecklists")}: {topCandidate.breakdown.checklistCompletionPct}%</li>
+              <li>{t("kpiReports")}: {topCandidate.breakdown.reportsFiled}</li>
+              <li>{t("kpiTill")}: {topCandidate.breakdown.tillAccuracyPct}%</li>
+            </ul>
+          </div>
+        )}
+
         {canAward && <AwardStarForm employees={employees ?? []} />}
 
         <ul className="space-y-2">

@@ -17,7 +17,8 @@
     "kpis": "KPIs",
     "incidents": "Incidents",
     "settings": "Settings",
-    "subscription": "Subscription"
+    "subscription": "Subscription",
+    "outOfStock": "Out of Stock"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -129,7 +130,15 @@
     "breaks": "Breaks",
     "search": "Search",
     "walk": "Walk & Report",
-    "stars": "Stars Board"
+    "stars": "Stars Board",
+    "reminders": "Reminders",
+    "inventory": "Inventory Count",
+    "howTo": "How-To Instructions",
+    "help": "Help & Support",
+    "workGroup": "Work",
+    "reportsGroup": "Reports",
+    "howToGroup": "How-To Instructions",
+    "moreGroup": "More"
   },
   "checklists": {
     "title": "Checklists",
@@ -295,7 +304,53 @@
     "starOfMonth": "Star of the Month",
     "whyPlaceholder": "Why? (optional)",
     "award": "Award star",
-    "saving": "Saving..."
+    "saving": "Saving...",
+    "kpiSuggestionTitle": "Suggested pick",
+    "kpiSuggestionBody": "{name} leads this week's KPI score at {score}/100.",
+    "kpiTasks": "Tasks",
+    "kpiChecklists": "Checklists",
+    "kpiReports": "Reports filed",
+    "kpiTill": "Till accuracy"
+  },
+  "remindersPage": {
+    "title": "Reminders",
+    "titlePlaceholder": "e.g. Water the plants",
+    "categoryWatering": "Watering",
+    "categoryExpiry": "Expiry dates",
+    "categoryCleaning": "Deep clean",
+    "categoryChemical": "Chemical solution",
+    "categoryOther": "Other",
+    "recurrenceOnce": "One-time",
+    "recurrenceDaily": "Daily",
+    "recurrenceWeekly": "Weekly",
+    "recurrenceMonthly": "Monthly",
+    "submit": "Add reminder",
+    "submitting": "Saving...",
+    "empty": "No reminders yet.",
+    "markDone": "Done"
+  },
+  "inventoryPage": {
+    "title": "Inventory Count",
+    "itemPlaceholder": "Item name",
+    "quantityPlaceholder": "Quantity",
+    "unitPlaceholder": "Unit (pcs, kg, L...)",
+    "notePlaceholder": "Note (optional)",
+    "submit": "Add count",
+    "submitting": "Saving...",
+    "empty": "No inventory counts logged yet."
+  },
+  "howToPage": {
+    "title": "How-To Instructions",
+    "category_cleaning": "Cleaning",
+    "category_maintenance": "Maintenance",
+    "category_preparation": "Preparation",
+    "guidesCount": "{count} guides",
+    "guideTitlePlaceholder": "Guide title",
+    "guideBodyPlaceholder": "Step-by-step instructions...",
+    "addGuide": "Add guide",
+    "submitting": "Saving...",
+    "empty": "No guides yet.",
+    "delete": "Delete"
   },
   "walkPage": {
     "startTitle": "Start a walk",

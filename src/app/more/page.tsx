@@ -43,6 +43,16 @@ export default async function MorePage() {
             search: t("search"),
             walk: t("walk"),
             stars: t("stars"),
+            reminders: t("reminders"),
+            outOfStock: tNav("outOfStock"),
+            waste: tNav("waste"),
+            inventory: t("inventory"),
+            howTo: t("howTo"),
+            help: t("help"),
+            workGroup: t("workGroup"),
+            reportsGroup: t("reportsGroup"),
+            howToGroup: t("howToGroup"),
+            moreGroup: t("moreGroup"),
             logout: t("logout"),
           }}
           showBranches={["organization_owner", "operations_manager"].includes(user?.org_role ?? "")}

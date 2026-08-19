@@ -17,7 +17,8 @@
     "kpis": "مؤشرات الأداء",
     "incidents": "الحوادث",
     "settings": "الإعدادات",
-    "subscription": "الاشتراك"
+    "subscription": "الاشتراك",
+    "outOfStock": "غير متوفر"
   },
   "dashboard": {
     "title": "لوحة التحكم",
@@ -129,7 +130,15 @@
     "breaks": "الاستراحات",
     "search": "البحث",
     "walk": "جولة تفقّدية",
-    "stars": "لوحة النجوم"
+    "stars": "لوحة النجوم",
+    "reminders": "التذكيرات",
+    "inventory": "جرد المخزون",
+    "howTo": "تعليمات كيفية التنفيذ",
+    "help": "المساعدة والدعم",
+    "workGroup": "العمل",
+    "reportsGroup": "التقارير",
+    "howToGroup": "تعليمات كيفية التنفيذ",
+    "moreGroup": "المزيد"
   },
   "checklists": {
     "title": "قوائم التحقق",
@@ -295,7 +304,53 @@
     "starOfMonth": "نجم الشهر",
     "whyPlaceholder": "لماذا؟ (اختياري)",
     "award": "منح النجمة",
-    "saving": "جارٍ الحفظ..."
+    "saving": "جارٍ الحفظ...",
+    "kpiSuggestionTitle": "الترشيح المقترح",
+    "kpiSuggestionBody": "{name} يتصدر مؤشر أداء هذا الأسبوع بـ {score}/100.",
+    "kpiTasks": "المهام",
+    "kpiChecklists": "قوائم التحقق",
+    "kpiReports": "البلاغات المسجّلة",
+    "kpiTill": "دقة الصندوق"
+  },
+  "remindersPage": {
+    "title": "التذكيرات",
+    "titlePlaceholder": "مثال: سقي النباتات",
+    "categoryWatering": "السقي",
+    "categoryExpiry": "تواريخ الانتهاء",
+    "categoryCleaning": "تنظيف عميق",
+    "categoryChemical": "محلول كيميائي",
+    "categoryOther": "أخرى",
+    "recurrenceOnce": "مرة واحدة",
+    "recurrenceDaily": "يوميًا",
+    "recurrenceWeekly": "أسبوعيًا",
+    "recurrenceMonthly": "شهريًا",
+    "submit": "إضافة تذكير",
+    "submitting": "جارٍ الحفظ...",
+    "empty": "لا توجد تذكيرات بعد.",
+    "markDone": "تم"
+  },
+  "inventoryPage": {
+    "title": "جرد المخزون",
+    "itemPlaceholder": "اسم الصنف",
+    "quantityPlaceholder": "الكمية",
+    "unitPlaceholder": "الوحدة (قطعة، كجم، لتر...)",
+    "notePlaceholder": "ملاحظة (اختياري)",
+    "submit": "إضافة جرد",
+    "submitting": "جارٍ الحفظ...",
+    "empty": "لا توجد عمليات جرد مسجّلة بعد."
+  },
+  "howToPage": {
+    "title": "تعليمات كيفية التنفيذ",
+    "category_cleaning": "التنظيف",
+    "category_maintenance": "الصيانة",
+    "category_preparation": "التحضير",
+    "guidesCount": "{count} دليل",
+    "guideTitlePlaceholder": "عنوان الدليل",
+    "guideBodyPlaceholder": "تعليمات خطوة بخطوة...",
+    "addGuide": "إضافة دليل",
+    "submitting": "جارٍ الحفظ...",
+    "empty": "لا توجد أدلة بعد.",
+    "delete": "حذف"
   },
   "walkPage": {
     "startTitle": "ابدأ جولة تفقّدية",
