@@ -1,4 +1,4 @@
-const CACHE_NAME = "operio-v2";
+const CACHE_NAME = "operio-v3";
 const OFFLINE_URL = "/offline";
 
 self.addEventListener("install", (event) => {
@@ -11,6 +11,9 @@ self.addEventListener("install", (event) => {
         cache.add(OFFLINE_URL),
         cache.add("/manifest.json"),
         cache.add("/icon.svg"),
+        cache.add("/icon-192.png"),
+        cache.add("/icon-512.png"),
+        cache.add("/apple-touch-icon.png"),
       ])
     )
   );
