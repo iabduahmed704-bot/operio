@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getUser } from "@/lib/auth";
 import { logoutAction } from "@/lib/actions/auth";
@@ -18,9 +19,9 @@ export default async function LoginPage() {
           <p className="text-sm text-muted-foreground">
             Signed in as <span className="font-medium text-foreground">{profile.email}</span>
           </p>
-          <a href="/" className="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">
+          <Link href="/" className="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">
             Go to dashboard
-          </a>
+          </Link>
           <form action={logoutAction}>
             <button type="submit" className="text-sm text-muted-foreground underline">
               Log out

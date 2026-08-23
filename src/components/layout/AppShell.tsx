@@ -18,14 +18,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   if (!showSidebar) return <>{children}</>;
 
-  const quickItems = [
+  const items = [
+    { key: "home", href: "/", icon: Home, label: tNav("home") },
     { key: "till", href: "/till", icon: Wallet, label: tMore("till") },
     { key: "checklists", href: "/checklists", icon: ClipboardList, label: tNav("checklists") },
     { key: "breaks", href: "/breaks", icon: Coffee, label: tMore("breaks") },
-  ];
-
-  const items = [
-    { key: "home", href: "/", icon: Home, label: tNav("home") },
     { key: "tasks", href: "/tasks", icon: ListChecks, label: tNav("tasks") },
     { key: "capture", href: "/capture", icon: Camera, label: tNav("capture") },
     { key: "reports", href: "/reports", icon: BarChart3, label: tNav("reports") },
@@ -43,29 +40,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
 
         <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-2 py-2 md:px-3">
-          {quickItems.map(({ key, href, icon: Icon, label }) => {
-            const active = pathname.startsWith(href);
-            return (
-              <Link
-                key={key}
-                href={href}
-                className={cn(
-                  "relative flex items-center justify-center gap-3 rounded-xl px-0 py-3 text-sm transition-colors md:justify-start md:px-3",
-                  active
-                    ? "bg-primary/10 font-semibold text-primary"
-                    : "text-muted-foreground hover:bg-background hover:text-foreground"
-                )}
-              >
-                <LinkPendingOverlay className="rounded-xl" />
-                <Icon className="h-5 w-5 shrink-0" />
-                <span className="hidden md:inline">{label}</span>
-                {active && <span className="absolute inset-y-1.5 start-0 w-1 rounded-full bg-primary md:hidden" />}
-              </Link>
-            );
-          })}
-
-          <div className="my-2 border-t border-border" />
-
           {items.map(({ key, href, icon: Icon, label }) => {
             const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
             return (

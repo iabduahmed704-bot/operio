@@ -18,6 +18,7 @@ export function ReminderList({ initialItems }: { initialItems: ReminderRow[] }) 
   const [items, setItems] = useState(initialItems);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [now] = useState(() => Date.now());
 
   function complete(id: string, recurrence: string) {
     startTransition(async () => {
@@ -35,8 +36,6 @@ export function ReminderList({ initialItems }: { initialItems: ReminderRow[] }) 
   if (items.length === 0) {
     return <p className="py-8 text-center text-sm text-muted-foreground">{t("empty")}</p>;
   }
-
-  const now = Date.now();
 
   return (
     <div className="space-y-2">

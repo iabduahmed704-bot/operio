@@ -34,9 +34,13 @@ export default async function SubscriptionPage() {
     ? ((rawPlan[0] as PlanRow) ?? null)
     : ((rawPlan as PlanRow) ?? null);
   const trialEndsAt = subscription?.trial_ends_at ? new Date(subscription.trial_ends_at) : null;
+  // Server Component — evaluated once per request render, not re-rendered
+  // client-side, so this read is safe despite the purity lint rule.
+  /* eslint-disable react-hooks/purity */
   const daysLeft = trialEndsAt
     ? Math.max(0, Math.ceil((trialEndsAt.getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
     : null;
+  /* eslint-enable react-hooks/purity */
 
   return (
     <div className="flex min-h-screen flex-col">
