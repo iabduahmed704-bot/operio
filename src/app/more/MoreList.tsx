@@ -35,6 +35,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import { logoutAction } from "@/lib/actions/auth";
+import { LinkPendingOverlay } from "@/components/ui/LinkPending";
 
 type LinkItem = { href: string; label: string; icon: typeof User };
 
@@ -163,8 +164,9 @@ export function MoreList({
                   <Link
                     key={href}
                     href={href}
-                    className="flex items-center justify-between py-3 text-sm transition-colors active:opacity-60"
+                    className="relative flex items-center justify-between py-3 text-sm transition-colors active:opacity-60"
                   >
+                    <LinkPendingOverlay />
                     <span className="flex items-center gap-3">
                       <Icon className="h-4 w-4 text-muted-foreground" />
                       {label}

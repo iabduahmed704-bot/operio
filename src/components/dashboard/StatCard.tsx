@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Coins, ListChecks, PackageX, AlertOctagon, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LinkPendingOverlay } from "@/components/ui/LinkPending";
 
 const iconMap = {
   coins: Coins,
@@ -73,7 +74,12 @@ export function StatCard({
   );
 
   if (href) {
-    return <Link href={href}>{content}</Link>;
+    return (
+      <Link href={href} className="relative block">
+        <LinkPendingOverlay className="rounded-2xl" />
+        {content}
+      </Link>
+    );
   }
   return content;
 }

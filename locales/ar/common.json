@@ -374,6 +374,8 @@
     "backToHome": "العودة إلى الرئيسية"
   },
   "settingsPage": {
+    "companyLogo": "شعار الشركة",
+    "uploadLogo": "رفع الشعار",
     "defaultLanguage": "اللغة الافتراضية",
     "currency": "العملة",
     "saved": "تم الحفظ",

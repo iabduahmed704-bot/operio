@@ -374,6 +374,8 @@
     "backToHome": "Back to home"
   },
   "settingsPage": {
+    "companyLogo": "Company logo",
+    "uploadLogo": "Upload logo",
     "defaultLanguage": "Default language",
     "currency": "Currency",
     "saved": "Saved",

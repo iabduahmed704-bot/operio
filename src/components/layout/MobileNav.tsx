@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Home, ListChecks, BarChart3, Camera, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LinkPendingOverlay } from "@/components/ui/LinkPending";
 
 export function MobileNav() {
   const t = useTranslations("nav");
@@ -34,10 +35,11 @@ export function MobileNav() {
             <Link key={key} href={href} className="flex flex-col items-center gap-1 -translate-y-3">
               <motion.span
                 whileTap={{ scale: 0.9 }}
-                className="flex h-13 w-13 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/40"
+                className="relative flex h-13 w-13 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/40"
                 style={{ height: 52, width: 52 }}
               >
                 <Icon className="h-6 w-6" />
+                <LinkPendingOverlay className="rounded-full bg-primary/70" />
               </motion.span>
               <span className="text-[11px] font-medium text-muted-foreground">{t(key)}</span>
             </Link>
@@ -49,6 +51,7 @@ export function MobileNav() {
             href={href}
             className="relative flex flex-col items-center gap-1 px-3 py-1"
           >
+            <LinkPendingOverlay className="rounded-xl" />
             {active && (
               <motion.span
                 layoutId="nav-active"

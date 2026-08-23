@@ -5,6 +5,7 @@ import { MobileNav } from "@/components/layout/MobileNav";
 import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { SettingsForm } from "./SettingsForm";
+import { LogoUploadForm } from "./LogoUploadForm";
 
 export default async function SettingsPage() {
   const tMore = await getTranslations("more");
@@ -16,10 +17,12 @@ export default async function SettingsPage() {
   const { data: org } = user.organization_id
     ? await supabase
         .from("organizations")
-        .select("default_locale, currency")
+        .select("default_locale, currency, logo_url")
         .eq("id", user.organization_id)
         .single()
     : { data: null };
+
+  const canEdit = user.org_role === "organization_owner";
 
   return (
     <div className="flex min-h-screen flex-col pb-24">
@@ -30,11 +33,23 @@ export default async function SettingsPage() {
         <h1 className="text-lg font-semibold">{tMore("settings")}</h1>
       </header>
 
-      <main className="flex-1 px-4 py-6 md:px-8">
+      <main className="flex-1 space-y-4 px-4 py-6 md:px-8">
+        {canEdit && user.organization_id && (
+          <LogoUploadForm
+            organizationId={user.organization_id}
+            currentLogoUrl={org?.logo_url ?? null}
+            labels={{
+              title: t("companyLogo"),
+              upload: t("uploadLogo"),
+              uploading: tCommon("loading"),
+              saved: t("saved"),
+            }}
+          />
+        )}
         <SettingsForm
           defaultLocale={org?.default_locale ?? "en"}
           currency={org?.currency ?? "SAR"}
-          canEdit={user.org_role === "organization_owner"}
+          canEdit={canEdit}
           labels={{
             locale: t("defaultLanguage"),
             currency: t("currency"),
