@@ -35,7 +35,7 @@ export default async function DashboardPage() {
   ];
 
   return (
-    <div className="flex min-h-screen flex-col pb-24">
+    <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-background/80 px-4 py-4 backdrop-blur md:px-8">
         <div>
           {org?.logo_url ? (

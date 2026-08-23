@@ -35,7 +35,7 @@ export default async function ExperimentsPage() {
     : { data: [] };
 
   return (
-    <div className="flex min-h-screen flex-col pb-24">
+    <div className="flex min-h-screen flex-col">
       <header className="flex items-center justify-between border-b border-border px-4 py-6 md:px-8">
         <h1 className="text-xl font-semibold">{t("title")}</h1>
         <Link
