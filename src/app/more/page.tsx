@@ -7,6 +7,7 @@ import { MoreList } from "./MoreList";
 export default async function MorePage() {
   const t = await getTranslations("more");
   const tNav = await getTranslations("nav");
+  const tDashboard = await getTranslations("dashboard");
   const user = await getUser();
 
   return (
@@ -36,6 +37,7 @@ export default async function MorePage() {
             till: t("till"),
             purchases: t("purchases"),
             incidents: tNav("incidents"),
+            criticalIssues: tDashboard("criticalIssues"),
             overtime: t("overtime"),
             trips: t("trips"),
             experiments: t("experiments"),

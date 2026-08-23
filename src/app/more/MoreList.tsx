@@ -54,6 +54,7 @@ export function MoreList({
     till: string;
     purchases: string;
     incidents: string;
+    criticalIssues: string;
     overtime: string;
     trips: string;
     experiments: string;
@@ -99,8 +100,8 @@ export function MoreList({
         { href: "/walk/new", label: labels.walk, icon: Footprints },
         { href: "/incidents", label: labels.incidents, icon: AlertOctagon },
         { href: "/out-of-stock", label: labels.outOfStock, icon: PackageX },
-        { href: "/capture?type=waste", label: labels.waste, icon: Flame },
-        { href: "/capture?type=issue", label: labels.incidents, icon: ShieldAlert },
+        { href: "/capture", label: labels.waste, icon: Flame },
+        { href: "/incidents", label: labels.criticalIssues, icon: ShieldAlert },
         { href: "/inventory", label: labels.inventory, icon: Boxes },
       ],
     },
